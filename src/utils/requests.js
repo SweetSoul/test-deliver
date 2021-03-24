@@ -1,6 +1,6 @@
 import axios from "axios"
 import { getToken, isAuthenticated } from "./auth";
-const urlApi = "http://5d8b64ad3c0aaf0014342c2a.mockapi.io/api/v1/collaborator"
+const urlApi = "https://5d8b64ad3c0aaf0014342c2a.mockapi.io/api/v1/collaborator"
 const urlApi2 = "https://randomuser.me/api/"
 
 

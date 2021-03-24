@@ -164,7 +164,10 @@ export default function Collaborator() {
 
     const handleAddFeedback = () => {
         requestApi(`/${id}/feedback`, 'POST', null, newFeedback)
-            .then(response => { setFeedbacksData([...feedbacksData, response]) })
+            .then(response => { 
+                console.log(response)
+                setFeedbacksData([...feedbacksData, response]) 
+            })
             .catch(error => console.log(error));
         handleClose();
     }

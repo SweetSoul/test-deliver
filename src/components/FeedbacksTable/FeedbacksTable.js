@@ -36,8 +36,8 @@ export default function FeedbacksTable(props) {
     const { data, onFeedbackChange, collabName, userId } = props;
     const classes = useStyles();
     const [page, setPage] = useState(0);
-    const [count, setCount] = useState(null)
-    const [timer1, setTimer1] = useState(null)
+    const [count, setCount] = useState(new Array(data.length).fill(0))
+    const [timer1, setTimer1] = useState(new Array(data.length).fill(null))
 
 
 
@@ -53,9 +53,6 @@ export default function FeedbacksTable(props) {
     }
 
     const updateLikes = async (n1, n2, fId, idx) => {
-        if (timer1 === null) {
-            await setTimer1(data.map(i => setTimeout(() => null)))
-        }
         let newLike = parseInt(n1) + parseInt(n2);
         clearTimeout(timer1[idx])
         setTimer1(timer1.map((timer, index) => (index === idx) ? setTimeout(() =>
@@ -65,15 +62,12 @@ export default function FeedbacksTable(props) {
     }
 
     const handleLike = async (value, idx, id) => {
-        if (count === null) {
-        await setCount(data.map(i => 0))
-        }
         console.log(count)
         if (idx >= count.length) {
             setCount([...count, 1])
             return updateLikes(count[idx] + 1, value, id, idx)
         }
-        setCount(count.map((number, index) => (index === idx) ? number += 1 : number))
+        setCount(count.map((number, index) => (number === null) ? 1 : (index === idx) ? number += 1 : number))
         return updateLikes(count[idx] + 1, value, id, idx)
     }
 
@@ -121,7 +115,7 @@ export default function FeedbacksTable(props) {
                                 <p>{row.message}</p>
                             </TableCell>
                             <TableCell align="center" className={classes.likeButtonContainer} >
-                                <p>{(count !== null) ? parseInt(row.like) + count[idx] : row.like}</p>
+                                <p>{(count[idx] === null) ? parseInt(row.like) : parseInt(count[idx]) + parseInt(row.like)}</p>
                                 <IconButton onClick={() => handleLike(row.like, idx, row.id)}>
                                     <ThumbUp />
                                 </IconButton>
