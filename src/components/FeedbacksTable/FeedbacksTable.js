@@ -36,8 +36,8 @@ export default function FeedbacksTable(props) {
     const { data, onFeedbackChange, collabName, userId } = props;
     const classes = useStyles();
     const [page, setPage] = useState(0);
-    const [count, setCount] = useState(new Array(data.length).fill(0))
-    const [timer1, setTimer1] = useState(new Array(data.length).fill(null))
+    const [count, setCount] = useState(new Array(10).fill(0))
+    const [timer1, setTimer1] = useState(new Array(10).fill(null))
 
 
 
@@ -115,7 +115,8 @@ export default function FeedbacksTable(props) {
                                 <p>{row.message}</p>
                             </TableCell>
                             <TableCell align="center" className={classes.likeButtonContainer} >
-                                <p>{(count[idx] === null) ? parseInt(row.like) : parseInt(count[idx]) + parseInt(row.like)}</p>
+                                <p>{parseInt(count[idx]) + parseInt(row.like)
+                                }</p>
                                 <IconButton onClick={() => handleLike(row.like, idx, row.id)}>
                                     <ThumbUp />
                                 </IconButton>

@@ -1,5 +1,7 @@
-import { Avatar, Button, Card, Divider, Grid, Backdrop, Fade, Modal, TextField,
-    Typography } from '@material-ui/core';
+import {
+    Avatar, Button, Card, Divider, Grid, Backdrop, Fade, Modal, TextField,
+    Typography
+} from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
@@ -147,10 +149,10 @@ export default function Collaborator() {
     let history = useHistory();
     const [collabInfo, setCollabInfo] = useState({ id: '', name: '', createdAt: '', company: '', role: '', avatar: '' });
     const [pictureSrc, setPictureSrc] = useState('');
-    const [feedbacksData, setFeedbacksData] = useState([{ data: 'none' }])
+    const [feedbacksData, setFeedbacksData] = useState([{}])
+    const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     const classes = useStyles();
-
     const [newFeedback, setNewFeedback] = useState({ collaboratorId: '', message: '', like: 1 })
 
     const handleOpen = () => {
@@ -164,9 +166,9 @@ export default function Collaborator() {
 
     const handleAddFeedback = () => {
         requestApi(`/${id}/feedback`, 'POST', null, newFeedback)
-            .then(response => { 
+            .then(response => {
                 console.log(response)
-                setFeedbacksData([...feedbacksData, response]) 
+                setFeedbacksData([...feedbacksData, response])
             })
             .catch(error => console.log(error));
         handleClose();
@@ -181,11 +183,13 @@ export default function Collaborator() {
             .then(feedData => setFeedbacksData(feedData))
             .catch(error => console.log(error))
 
-        requestApi2('/', 'GET', {inc: 'picture'})
-        .then(imgData => {
-            setPictureSrc(imgData.results[0].picture.large)
-        })
-        .catch(error => console.log(error))
+        requestApi2('/', 'GET', { inc: 'picture' })
+            .then(imgData => {
+                setPictureSrc(imgData.results[0].picture.large)
+            })
+            .catch(error => console.log(error))
+
+        setTimeout(() => setLoading(false), 1500)
     }, [id])
 
 
@@ -235,7 +239,7 @@ export default function Collaborator() {
                                 </Button>
                             </Grid>
                         </Grid>
-                        {(feedbacksData.data !== 'none')
+                        {(!loading)
                             ? <FeedbacksTable
                                 data={feedbacksData}
                                 collabName={collabInfo.name}
