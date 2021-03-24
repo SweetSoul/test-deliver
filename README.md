@@ -20,6 +20,7 @@ This panel was proposed to simulate a situation where we could give feedback to 
 - [2. Localhost reproduction](#2-localhost-reproduction)
 - [3. Hosting reproduction](#3-hosting-reproduction)
   - [3.1. Folder different from root in hosting](#31-folder-different-from-root-in-hosting)
+- [4. Known Issues](#4-known-issues)
 
 ## 2. Localhost reproduction
 
