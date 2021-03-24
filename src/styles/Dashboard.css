@@ -1,0 +1,24 @@
+body{
+    background-color: #222831;
+    color: #eeeeee;
+}
+
+td{ 
+    padding: 5px!important;
+}
+
+td p, th{
+    color: #eee!important;
+}
+
+button{
+    color: #eee!important;
+}
+
+button:disabled{
+    color: rgb(117, 117, 117)!important;
+}
+
+tr:nth-child(even){
+    background-color: #2b323d;
+}
