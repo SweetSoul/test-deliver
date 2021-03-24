@@ -89,3 +89,7 @@ If you need to host it inside folder hierarchy in hosting follow these two steps
 ```bash
 npm run build
 ```
+
+# 4. Known Issues
+
+- This project uses [mockApi](https://mockApi.io) to fake the Api Results and they have some limits of inserting data (as you can see [here](https://github.com/zapier/zapier-platform-cli/issues/219)), if you try to add a new feedback and nothing happens, just remove some feedbacks and try again.
